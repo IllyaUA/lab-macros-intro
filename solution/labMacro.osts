@@ -1,0 +1,32 @@
+function main(workbook: ExcelScript.Workbook) {
+  // Your code here
+  let worksheets = workbook.getWorksheets();
+  // Iterate through each worksheet
+  worksheets.forEach((worksheet) => {
+    // Task 1: Delete the first column
+    let firstColumn = worksheet.getRange("A:A");
+    firstColumn.delete(ExcelScript.DeleteShiftDirection.left);
+
+    // Change the format of column E to "dd/mm/yy hh:mm"
+    worksheet.getRange("F:F").setNumberFormatLocal("dd/mm/yy hh:mm");
+
+    // Set fill color to #ED7D31 for range A1:E1 on selectedSheet
+    worksheet.getRange("A1:E1").getFormat().getFill().setColor("#ED7D31");
+
+    // Set horizontal alignment to ExcelScript.HorizontalAlignment.center for range A:E on selectedSheet
+    worksheet.getRange("A:E").getFormat().setHorizontalAlignment(ExcelScript.HorizontalAlignment.center);
+
+    // Indent set to 0 for range A:E on selectedSheet
+    worksheet.getRange("A:E").getFormat().setIndentLevel(0);
+
+    // Autofit all columns to fit the content
+    worksheet.getRange("A:E").getFormat().autofitColumns();
+
+    worksheet.getRange("A:A").getEntireColumn().getFormat().setColumnWidth(100);
+    worksheet.getRange("B:B").getEntireColumn().getFormat().setColumnWidth(180);
+    worksheet.getRange("C:C").getEntireColumn().getFormat().setColumnWidth(200);
+    worksheet.getRange("D:D").getEntireColumn().getFormat().setColumnWidth(100);
+    worksheet.getRange("E:E").getEntireColumn().getFormat().setColumnWidth(140);
+  
+  });
+}
